@@ -1,5 +1,9 @@
 @import "syntax-variables";
 
+atom-text-editor {
+  font-weight: 100;
+}
+
 atom-text-editor, :host {
   background-color: @syntax-background-color;
   color: @syntax-text-color;
@@ -131,10 +135,6 @@ atom-text-editor .search-results .marker.current-result .region,
 
   &.control {
     color: @def-keyword;
-  }
-
-  &.operator {
-    color: @def-operator;
 
     &.module {
       color: @def-keyword;
@@ -142,6 +142,10 @@ atom-text-editor .search-results .marker.current-result .region,
         color: @def-interface-name;
       }
     }
+  }
+
+  &.operator {
+    color: @def-operator;
   }
 
   &.other.special-method {
@@ -428,3 +432,5 @@ atom-text-editor[mini] .scroll-view,
 :host([mini]) .scroll-view {
   padding-left: 1px;
 }
+
+/* java stuff */
