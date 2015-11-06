@@ -2,6 +2,7 @@
 
 atom-text-editor {
   font-weight: 100;
+  text-rendering: optimizeLegibility;
 }
 
 atom-text-editor, :host {
@@ -107,6 +108,10 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .comment {
+  .leading-whitespace {
+    color: @syntax-background-color;
+    background-color: @syntax-background-color;
+  }
   color: @def-comment;
   background-color: @def-comment-bg;
 }
@@ -138,7 +143,7 @@ atom-text-editor .search-results .marker.current-result .region,
 
     &.module {
       color: @def-keyword;
-      ~ * .variable, ~ .variable {
+      ~ * .variable, ~ .variable, ~ .builtin, ~ * .builtin, {
         color: @def-interface-name;
       }
     }
@@ -192,6 +197,9 @@ atom-text-editor .search-results .marker.current-result .region,
 
 .variable {
   color: @def-global-variable;
+  &.class {
+      color: @def-class-name;
+  }
   &.this {
     color: @def-keyword;
   }
@@ -224,6 +232,12 @@ atom-text-editor .search-results .marker.current-result .region,
 
 .meta.brace > span {
  font-weight: normal;
+}
+
+.object.key {
+    .string.unquoted {
+        color: @def-label;
+    }
 }
 
 .meta.brace.round, .meta.braces.round {
@@ -299,7 +313,7 @@ atom-text-editor .search-results .marker.current-result .region,
 
 .support {
   &.class {
-    color: @light-orange;
+    color: @def-class-name;
   }
 
   &.function  {
@@ -339,6 +353,12 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .meta {
+  &.function, &.function-call, &.method {
+      .parameters.begin ~ .variable {
+          color: @def-param;
+      }
+  }
+
   &.class {
     color: @light-orange;
   }
