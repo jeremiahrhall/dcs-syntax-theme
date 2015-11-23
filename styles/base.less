@@ -2,7 +2,7 @@
 
 atom-text-editor {
   font-weight: 100;
-  text-rendering: optimizeLegibility;
+  //text-rendering: optimizeLegibility;
 }
 
 atom-text-editor, :host {
@@ -143,7 +143,7 @@ atom-text-editor .search-results .marker.current-result .region,
 
     &.module {
       color: @def-keyword;
-      ~ * .variable, ~ .variable, ~ .builtin, ~ * .builtin, {
+      ~ * .variable, ~ .variable, ~ .builtin, ~ * .builtin, ~ * .object.node.js, ~ * .module.node.js {
         color: @def-interface-name;
       }
     }
@@ -314,6 +314,10 @@ atom-text-editor .search-results .marker.current-result .region,
 .support {
   &.class {
     color: @def-class-name;
+  }
+
+  &.object, &.module {
+    color: saturate(lighten(average(@def-global-variable, @def-instance-field), 10%), 25%);
   }
 
   &.function  {
