@@ -242,6 +242,9 @@ atom-text-editor .search-results .marker.current-result .region,
 
 .meta.brace.round, .meta.braces.round {
   color: @def-brackets;
+  &.function.arguments.group {
+      font-weight: bold;
+  }
 }
 
 
@@ -356,8 +359,15 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 }
 
+// maybe I should work on a language plugin...
+.meta.group.braces.round > .meta.group.braces.curly > .meta.function-call.with-arguments:first-child {
+    .entity.name.function + .parameters.begin ~ .variable {
+        color: @def-param;
+    }
+}
+
 .meta {
-  &.function, &.function-call, &.method {
+  &.function.arrow {
       .parameters.begin ~ .variable {
           color: @def-param;
       }
