@@ -2,7 +2,7 @@
 
 atom-text-editor {
   font-weight: 100;
-  //text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
 }
 
 atom-text-editor, :host {
@@ -53,6 +53,10 @@ atom-text-editor, :host {
 
   .selection .region {
     background-color: @syntax-selection-color;
+  }
+
+  .cursor-line {
+    background-color: @cursor-line;
   }
 }
 
@@ -116,6 +120,10 @@ atom-text-editor .search-results .marker.current-result .region,
   background-color: @def-comment-bg;
 }
 
+.jsx.tag {
+  color: @def-jsx-tag;
+}
+
 .entity {
   &.name.type {
     color: @def-class-name;
@@ -143,14 +151,50 @@ atom-text-editor .search-results .marker.current-result .region,
 
     &.module {
       color: @def-keyword;
-      ~ * .variable, ~ .variable, ~ .builtin, ~ * .builtin, ~ * .object.node.js, ~ * .module.node.js {
+
+      + .function {
+        .name {
+          color: @def-exports;
+        }
+      }
+
+      + .storage.type {
+        & + .variable {
+          color: @def-exports;
+        }
+
+        & + .meta.function {
+          .entity.name.function {
+            color: @def-exports;
+          }
+        }
+      }
+
+      + .variable,
+      + .builtin,
+      + .builtin,
+      + .object.node.js,
+      + .module.node.js,
+      {
         color: @def-interface-name;
+      }
+
+      ~ .brace.curly {
+        & ~ .variable,
+        & ~ .builtin,
+        & ~ .builtin,
+        & ~ .object.node.js,
+        & ~ .module.node.js, {
+          color: @def-interface-name;
+        }
       }
     }
   }
 
   &.operator {
-    color: @def-operator;
+    &.assignment, &.accessor, &.arithmetic, &.comparison, &.ternary, &.logical, &.relational {
+      color: @def-operator;
+    }
   }
 
   &.other.special-method {
@@ -347,6 +391,9 @@ atom-text-editor .search-results .marker.current-result .region,
 
   &.name.tag {
     color: @def-function-declaration;
+    .class.component {
+      color: @light-orange;
+    }
     //text-decoration: underline;
   }
 
@@ -367,10 +414,16 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .meta {
-  &.function.arrow {
-      .parameters.begin ~ .variable {
+  &.function {
+    &.arrow {
+      .variable {
           color: @def-param;
       }
+    }
+
+    .parameters.begin ~ .variable {
+      color: @def-param;
+    }
   }
 
   &.class {
@@ -400,6 +453,12 @@ atom-text-editor .search-results .marker.current-result .region,
 
   &.property {
     color: @def-instance-field;
+
+    &.class {
+      .variable.static {
+        color: @def-function-declaration;
+      }
+    }
   }
 
   &.group.braces.curly {
@@ -468,3 +527,10 @@ atom-text-editor[mini] .scroll-view,
 }
 
 /* java stuff */
+
+/* ruby stuff */
+.source.ruby {
+  .symbol {
+    color: @def-instance-field;
+  }
+}
